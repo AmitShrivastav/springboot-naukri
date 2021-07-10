@@ -2,10 +2,9 @@ package com.refwise.naukri.naukri.controller;
 
 import com.refwise.naukri.naukri.entity.NaukriSkill;
 import com.refwise.naukri.naukri.service.SkillServiceImpl;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,12 +18,17 @@ public class NaukriSkillController {
     }
 
     @GetMapping(value = "/v1/skills",produces = "application/json")
-    public List<NaukriSkill> allSkill() {
-        return  skillService.getSkill();
+    public ResponseEntity<List<NaukriSkill>> allSkill() {
+        return  new ResponseEntity<List<NaukriSkill>>(skillService.getSkill(), HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/v1/skills",produces = "application/json")
-    public String delete() {
-        return  skillService.delete();
+    public ResponseEntity<String> delete() {
+        return  new ResponseEntity<String>(skillService.delete(),HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/v1/skills",produces = "application/json")
+    public ResponseEntity<String> addSkill(@RequestBody NaukriSkill naukriSkill ) {
+        return  new ResponseEntity<String>(skillService.addSkill(naukriSkill),HttpStatus.OK);
     }
 }

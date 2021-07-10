@@ -34,5 +34,14 @@ public class SkillServiceImpl {
         }
     }
 
+    public String addSkill(NaukriSkill naukriSkill){
+        if(naukriSkill.getSkill() != null && naukriSkill.getSkill().length()>0) {
+            skillRepository.save(naukriSkill);
+            return  "Successfully Added";
+        }
+        else{
+            return  "Not Inserted";
+        }
 
+    }
 }

@@ -5,11 +5,15 @@ import com.refwise.naukri.naukri.dto.Job;
 import com.refwise.naukri.naukri.entity.NaukriSkill;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional
 public class SkillServiceImpl {
 
     @Autowired
@@ -34,14 +38,18 @@ public class SkillServiceImpl {
         }
     }
 
-    public String addSkill(NaukriSkill naukriSkill){
+
+    @Transactional(isolation = Isolation.SERIALIZABLE,propagation = Propagation.REQUIRED)
+    public String addSkill(NaukriSkill naukriSkill)  {
+        String response  = "Invalid Entry";
+
         if(naukriSkill.getSkill() != null && naukriSkill.getSkill().length()>0) {
             skillRepository.save(naukriSkill);
-            return  "Successfully Added";
+            response = "Successfully Added";
         }
-        else{
-            return  "Not Inserted";
+        if(naukriSkill.getSkill().equalsIgnoreCase("Test")){
+            throw new RuntimeException();
         }
-
+        return response;
     }
 }

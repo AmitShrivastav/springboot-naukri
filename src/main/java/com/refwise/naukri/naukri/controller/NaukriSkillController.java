@@ -18,7 +18,7 @@ public class NaukriSkillController {
     }
 
     @GetMapping(value = "/v1/skills",produces = "application/json")
-    public ResponseEntity<List<NaukriSkill>> allSkill() {
+    public ResponseEntity<List<NaukriSkill>> allSkill()throws Exception {
         return  new ResponseEntity<List<NaukriSkill>>(skillService.getSkill(), HttpStatus.OK);
     }
 

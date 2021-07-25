@@ -2,13 +2,11 @@ package com.refwise.naukri.naukri.controller;
 
 
 import com.refwise.naukri.naukri.dto.Job;
+import com.refwise.naukri.naukri.entity.NaukriSkill;
 import com.refwise.naukri.naukri.service.HelloWorldImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class HelloWorld {

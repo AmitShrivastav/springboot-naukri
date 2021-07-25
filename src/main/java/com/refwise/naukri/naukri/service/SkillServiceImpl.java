@@ -13,18 +13,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@Transactional
+
 public class SkillServiceImpl {
 
     @Autowired
     SkillRepository skillRepository;
 
-    public List<NaukriSkill> getSkill() {
-        List<NaukriSkill>  listNaukriSkill = new ArrayList<>();
-
-        for(NaukriSkill naukri : skillRepository.findAll()){
-            listNaukriSkill.add(naukri);
-        }
+    public List<NaukriSkill> getSkill() throws Exception {
+        List<NaukriSkill> listNaukriSkill = null;
+            for (NaukriSkill naukri : skillRepository.findAll()) {
+                if(listNaukriSkill == null)
+                listNaukriSkill = new ArrayList<>();
+                listNaukriSkill.add(naukri);
+            }
+            if(listNaukriSkill == null)throw new Exception();
     return listNaukriSkill;
     }
 
